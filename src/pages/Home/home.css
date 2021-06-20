@@ -1,0 +1,79 @@
+#home {
+    background: var(--primary-color);
+    color: white;
+    height: 100vh;
+    display: grid;
+    place-items: center;
+    width: 100vw;
+}
+
+#home .content {
+    text-align: center;
+    position: relative;
+    top: -50px;
+}
+
+#home .content img {
+    width: 180px;
+}
+
+#home .content .title h3 {
+    font-size: 3em;
+}
+
+#home .content .subtitle {
+    font-size: 1.35em;
+    font-weight: 400;
+}
+
+#home .content form input {
+    width: 75vw;
+    padding: 5px;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid white;
+    margin-top: 3em;
+    color: white;
+}
+
+#home .content form input:focus{
+    outline: none;
+}
+
+#home .content form input::-webkit-input-placeholder {
+    text-align: center;
+    color: white;
+    font-size: 1em;
+}
+
+#home .content form input:-moz-placeholder { /* Firefox 18- */
+    text-align: center;
+    color: white;
+    font-size: 1em;
+}
+
+#home .content form input::-moz-placeholder {  /* Firefox 19+ */
+    text-align: center;
+    color: white;
+    font-size: 1em;
+}
+
+#home .content form input:-ms-input-placeholder {
+    text-align: center;
+    color: white;
+    font-size: 1em;
+}
+
+#home .content form button{
+    padding: 5px 50px;
+    font-size: 1em;
+    font-weight: 600;
+    color: white;
+    background: var(--secondary-color);
+    border: none;
+    border-radius: 5px;
+    margin-top: 2em;
+    cursor: pointer;
+}
+
+
