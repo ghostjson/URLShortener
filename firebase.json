@@ -1,0 +1,12 @@
+{
+  "hosting": {
+    "site": "urlshortener1",
+    "public": "dist",
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
