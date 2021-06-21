@@ -10,7 +10,7 @@
            urlObj.getHashUrl(url)
                .then(res => {
                    if(res.data() !== undefined){
-                       location.href = res.data()['url']
+                       location.href = "//"+res.data()['url']
                    }else{
                        this.$router.push({name: 'NotFound'})
                    }

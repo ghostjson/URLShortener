@@ -7,17 +7,31 @@ export class Url {
     }
 
     async storeURL(url) {
-        const docRef = await this.URLdb.add({
-            url
-        })
+        const exist = await this.isExistThenReturn(url)
 
-        return  docRef.id
+        if (exist[0]){
+            return exist[1]
+        }else{
+            const docRef = await this.URLdb.add({
+                url
+            })
+            return  docRef.id
+        }
+        // const urlExist =
+        // const isExist = await urlExist(url)
+        // console.log(isExist)
+
     }
 
-    // async checkHashExists(hash){
-    //     const res = await db.collection("urls").where("hash", "==", hash).get()
-    //     return res.docs.length !== 0
-    // }
+    async isExistThenReturn(url) {
+        const record = await this.URLdb.where("url", "==", url).get()
+
+        if (record.docs.length !== 0){
+            return [true, record.docs[0].id]
+        }else{
+            return [false, undefined]
+        }
+    }
 
     async getHashUrl(hash){
         return await db.doc(`urls/${hash}`).get()
