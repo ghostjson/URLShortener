@@ -1,15 +1,18 @@
 <template>
     <div>
-        <home></home>
+        <router-view></router-view>
     </div>
 </template>
 
 <style>
+
     * {
         margin: 0;
         padding: 0;
         font-family: 'Roboto', sans-serif;
         box-sizing: border-box;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
     }
 
     :root {
@@ -19,15 +22,8 @@
         --complementary-color2: #F7A35F;
     }
 </style>
-
 <script>
-
-    import Home from "@/pages/Home/Home";
-
     export default {
-        name: 'App',
-        components: {Home},
-
+        name: 'App'
     }
 </script>
-
