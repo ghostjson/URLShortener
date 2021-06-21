@@ -1,5 +1,7 @@
 # url_shortener
 
+![Screenshot](https://github.com/ghostjson/URLShortener/blob/master/screenshot.png?raw=true)
+
 ## Project setup
 ```
 yarn install
