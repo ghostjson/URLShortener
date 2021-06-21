@@ -1,6 +1,7 @@
 <script>
     import {Url} from "@/services/url.service";
 
+
     export default {
         name: 'Home',
         data() {
@@ -8,17 +9,29 @@
                 url: '',
                 urlService: null,
                 id: '',
-                page: 0
+                page: 0,
+                error: ''
             }
         },
         methods: {
+            validURL(str) {
+                const pattern = new RegExp('^(https?:\\/\\/)?' + // protocol
+                    '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
+                    '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
+                    '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
+                    '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
+                    '(\\#[-a-z\\d_]*)?$', 'i'); // fragment locator
+                return !!pattern.test(str);
+            },
             async storeURL() {
-                if (this.url !== '') {
+                if (this.url !== '' && this.validURL(this.url)) {
                     this.id = window.location.origin + '/' + (await this.urlService.storeURL(this.url))
                     this.page++;
+                } else {
+                    this.error = 'Given URL is not a valid URL'
                 }
             },
-            async copyURL(){
+            async copyURL() {
                 const copyText = document.getElementById('short')
 
                 copyText.select()
@@ -29,7 +42,6 @@
         },
         created() {
             this.urlService = new Url();
-            this.storeURL()
         }
     }
 </script>
@@ -59,6 +71,8 @@
                     <label for="link" style="display: none">Link</label>
                     <input type="text" id="link" placeholder="Paste link here" v-model="url">
                     <br>
+                    <small style="color: var(--secondary-color)">{{ error }}</small>
+                    <br>
                     <button type="button" @click="storeURL">short it</button>
                 </form>
             </section>
@@ -68,7 +82,7 @@
                 </p>
                 <form>
                     <label for="short" style="display: none">Link</label>
-                    <input type="text" id="short"  v-model="id">
+                    <input type="text" id="short" v-model="id">
                     <br>
                     <button type="button" @click="copyURL">Copy URL</button>
                 </form>
