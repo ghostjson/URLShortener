@@ -1,6 +1,36 @@
 <script>
+    import {Url} from "@/services/url.service";
+
     export default {
         name: 'Home',
+        data() {
+            return {
+                url: '',
+                urlService: null,
+                id: '',
+                page: 0
+            }
+        },
+        methods: {
+            async storeURL() {
+                if (this.url !== '') {
+                    this.id = window.location.origin + '/' + (await this.urlService.storeURL(this.url))
+                    this.page++;
+                }
+            },
+            async copyURL(){
+                const copyText = document.getElementById('short')
+
+                copyText.select()
+                copyText.setSelectionRange(0, 99999)
+
+                document.execCommand("copy")
+            }
+        },
+        created() {
+            this.urlService = new Url();
+            this.storeURL()
+        }
     }
 </script>
 
@@ -20,16 +50,29 @@
             <div class="title">
                 <h3>URL SHORTENER</h3>
             </div>
-            <p class="subtitle">
-                Paste your long long URL to be SHORTENED.
-            </p>
+            <section v-if="page === 0">
+                <p class="subtitle">
+                    Paste your long long URL to be SHORTENED.
+                </p>
 
-            <form>
-                <label for="link" style="display: none">Link</label>
-                <input type="text" id="link" placeholder="Paste link here">
-                <br>
-                <button type="button">short it</button>
-            </form>
+                <form>
+                    <label for="link" style="display: none">Link</label>
+                    <input type="text" id="link" placeholder="Paste link here" v-model="url">
+                    <br>
+                    <button type="button" @click="storeURL">short it</button>
+                </form>
+            </section>
+            <section v-if="page === 1">
+                <p class="subtitle">
+                    Your SHORTENED URL
+                </p>
+                <form>
+                    <label for="short" style="display: none">Link</label>
+                    <input type="text" id="short"  v-model="id">
+                    <br>
+                    <button type="button" @click="copyURL">Copy URL</button>
+                </form>
+            </section>
         </div>
     </div>
 </template>

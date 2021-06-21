@@ -5,14 +5,14 @@
 </template>
 
 <style>
-    *{
+    * {
         margin: 0;
         padding: 0;
         font-family: 'Roboto', sans-serif;
         box-sizing: border-box;
     }
 
-    :root{
+    :root {
         --primary-color: #283646;
         --secondary-color: #F65B53;
         --complementary-color1: #10A3A9;
@@ -23,9 +23,11 @@
 <script>
 
     import Home from "@/pages/Home/Home";
+
     export default {
         name: 'App',
         components: {Home},
+
     }
 </script>
 
